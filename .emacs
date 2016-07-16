@@ -1,0 +1,77 @@
+(require 'package)
+
+(add-to-list 'package-archives
+	'("melpa" . "https://melpa.org/packages/"))
+
+(package-initialize)
+
+;; list the packages you want
+(setq package-list
+      '(ac-c-headers
+	color-theme-solarized
+	ecb
+	evil
+	flycheck
+	go-autocomplete go-mode go-snippets golint gotest))
+
+;; activate all the packages
+(package-initialize)
+
+;; fetch the list of packages available 
+(unless package-archive-contents
+	(package-refresh-contents))
+
+;; install the missing packages
+(dolist (package package-list)
+	(unless (package-installed-p package)
+	  (package-install package)))
+
+;; env
+(setenv "GOPATH" "/home/nhlfr/gopath")
+(setenv "PATH" (concat (getenv "PATH") ":/home/nhlfr/gopath/bin"))
+(setq exec-path (append exec-path '("/home/nhlfr/gopath/bin")))
+
+;; autocompletion
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(with-eval-after-load 'go-mode
+  (require 'go-autocomplete))
+(ac-config-default)
+
+;; evil
+(require 'evil)
+(evil-mode 1)
+
+;; ecb/cedet
+(require 'ecb)
+(setq ecb-tip-of-the-day nil)
+(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+(global-ede-mode 1)
+(ecb-activate)
+
+;; font
+(set-default-font "Hack 8")
+
+;; linum mode
+(add-hook 'prog-mode-hook 'linum-mode)
+
+;; solarized
+(set-frame-parameter nil 'background-mode 'dark)
+(load-theme 'solarized t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40")
+ '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+ '(package-selected-packages
+   (quote
+    (color-theme-solarized python-environment golint go-snippets go-mode go-autocomplete epc))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
