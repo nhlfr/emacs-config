@@ -38,14 +38,26 @@
   (require 'go-autocomplete))
 (ac-config-default)
 
+;; c indentation
+(setq-default c-basic-offset 8
+                  tab-width 8
+                  indent-tabs-mode t)
+
+;; go-mode hooks
+(add-hook 'go-mode-hook
+	  (lambda ()
+	    (add-hook 'before-save-hook 'gofmt-before-save)))
+
 ;; evil
 (require 'evil)
 (evil-mode 1)
 
 ;; ecb/cedet
 (require 'ecb)
-(setq ecb-tip-of-the-day nil)
-(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+(setq ecb-tip-of-the-day nil
+      ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1)
+      ecb-windows-width 30
+      ecb-fix-window-size 'width)
 (global-ede-mode 1)
 (ecb-activate)
 
@@ -66,6 +78,7 @@
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
+ '(ecb-source-path (quote (("/home/nhlfr" "/home/nhlfr"))))
  '(package-selected-packages
    (quote
     (color-theme-solarized python-environment golint go-snippets go-mode go-autocomplete epc))))
