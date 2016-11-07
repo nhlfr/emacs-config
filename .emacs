@@ -9,7 +9,6 @@
 (setq package-list
       '(ac-c-headers
 	color-theme-solarized
-	ecb
 	evil
 	flycheck
 	go-autocomplete go-mode go-snippets golint gotest))
@@ -52,20 +51,15 @@
 (require 'evil)
 (evil-mode 1)
 
-;; ecb/cedet
-(require 'ecb)
-(setq ecb-tip-of-the-day nil
-      ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1)
-      ecb-windows-width 30
-      ecb-fix-window-size 'width)
-(global-ede-mode 1)
-(ecb-activate)
-
 ;; font
-(set-default-font "Hack 8")
+(set-default-font "Monospace 8")
 
 ;; linum mode
 (add-hook 'prog-mode-hook 'linum-mode)
+
+;; bars
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; solarized
 (set-frame-parameter nil 'background-mode 'dark)
@@ -76,7 +70,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-options-version "2.40")
+ '(ecb-options-version "2.50")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
  '(ecb-source-path (quote (("/home/nhlfr" "/home/nhlfr"))))
  '(package-selected-packages
